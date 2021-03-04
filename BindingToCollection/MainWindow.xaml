@@ -1,0 +1,46 @@
+﻿<Window x:Class="BindingToCollection.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BindingToCollection"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <DockPanel>
+        <!--Binding to the collection using ToString-->
+        <ListBox ItemsSource="{Binding MyProducts}" SelectedItem="{Binding ChosenProduct}" DockPanel.Dock="Left">
+            <ListBox.ItemTemplate>
+                <!-- defines the view of the object!  This overrides the basic toString representation of MyProducts-->
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding ProductId}"/>
+                        <TextBlock Text="{Binding Description}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel>
+            <TextBlock>Product Details</TextBlock>
+            <UniformGrid Columns="2" Rows="4">
+                <TextBlock>Product ID</TextBlock>
+                <TextBlock Text="{Binding ChosenProduct.ProductId}"></TextBlock>
+                <TextBlock>Product Description</TextBlock>
+                <TextBlock Text="{Binding ChosenProduct.Description}"></TextBlock>
+                <TextBlock>Price</TextBlock>
+                <TextBlock Text="{Binding ChosenProduct.Price}"></TextBlock>
+            </UniformGrid>
+            <TextBlock>Image</TextBlock>
+            <Image Width="100" Height="100" Source="{Binding ChosenProduct.Abbildung}"/>
+
+            <UniformGrid Columns="2" Rows="4">
+                <TextBlock>Product ID</TextBlock>
+                <TextBox Text="{Binding NewProduct.ProductId}"></TextBox>
+                <TextBlock>Product Description</TextBlock>
+                <TextBox Text="{Binding NewProduct.Description}"></TextBox>
+                <TextBlock>Price</TextBlock>
+                <TextBox Text="{Binding NewProduct.Price}"></TextBox>
+            </UniformGrid>
+            <Button Click="AddNew" >Add new Product</Button>
+        </StackPanel>
+    </DockPanel>
+</Window>

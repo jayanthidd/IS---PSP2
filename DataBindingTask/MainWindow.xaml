@@ -1,0 +1,25 @@
+﻿<Window x:Class="DataBindingTask.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DataBindingTask"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <StackPanel>
+        <TextBox Text="{Binding MovieName, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        <TextBox Text="{Binding YearOfRelease}"></TextBox>
+        <!--Option 1-->
+        <ComboBox x:Name="chosen" ItemsSource="{Binding Genre}"></ComboBox>
+        <!--Option 2
+        <ComboBox ItemsSource="{Binding Genre}" SelectedItem="{Binding Genre}"></ComboBox> -->
+        <Slider Minimum="1" Maximum="5" Value="{Binding Rating}"></Slider>
+        <!--Two way data binding-->
+        <Label Content="{Binding MovieName}"></Label>
+        <Label Content="{Binding YearOfRelease}"></Label>
+        <Label Content="{Binding ElementName= chosen, Path=SelectedValue}"></Label>
+        <!--Option 2
+        <Label Content="{Binding Genre}"></Label> -->
+        <Label Content="{Binding Rating}"></Label>
+    </StackPanel>
+</Window>

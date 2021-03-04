@@ -1,0 +1,79 @@
+﻿<Window x:Class="HolidayWpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HolidayWpf"
+        mc:Ignorable="d"
+        Title="HolidayManagement" Height="450" Width="800">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="New"></MenuItem>
+                <MenuItem Header="End"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Edit">
+                <MenuItem Header="Cut"></MenuItem>
+                <MenuItem Header="Copy"></MenuItem>
+                <MenuItem Header="Search" Click="MenuItem_Click"
+></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Info">
+            </MenuItem>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem Content="{Binding NoOfVacations}"></StatusBarItem>
+            <StatusBarItem Content="{Binding NoOfRelaxingVacations}"></StatusBarItem>
+            <StatusBarItem Content="{Binding NoOfActiveVacations}"></StatusBarItem>
+            <StatusBarItem Content="{Binding FilteredNumber}"></StatusBarItem>
+        </StatusBar>
+        <ListBox DockPanel.Dock="Left" ItemsSource="{Binding ObservableVacationCollection}" SelectedItem="{Binding ChosenVacation}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <UniformGrid Columns="2" Rows="1">
+                        <TextBlock Text="{Binding Id}"></TextBlock>
+                        <TextBlock Text="{Binding Type}"></TextBlock>
+                    </UniformGrid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox DockPanel.Dock="Left" ItemsSource="{Binding ObservableVacationCollectionFiltered}" SelectedItem="{Binding ChosenVacation}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <UniformGrid Columns="2" Rows="1">
+                        <TextBlock Text="{Binding Id}"></TextBlock>
+                        <TextBlock Text="{Binding Type}"></TextBlock>
+                    </UniformGrid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <UniformGrid Columns="1" Rows="2">
+            <UniformGrid Columns="2" Rows="5" >
+                <TextBlock>Vacation Type</TextBlock>
+                <TextBox Text="{Binding ChosenVacation.Type}"></TextBox>
+                <TextBlock>Description</TextBlock>
+                <TextBox Text="{Binding ChosenVacation.Description}"></TextBox>
+                <TextBlock>Photo</TextBlock>
+                <Image Source="{Binding ChosenVacation.Photo}"></Image>
+                <TextBlock Text="Rating"></TextBlock>
+                <TextBox Text="{Binding ChosenVacation.Rating}"/>
+                <TextBlock Text="Reservation Status"></TextBlock>
+                <TextBox Text="{Binding ChosenVacation.Vorgemerkt}"/>
+            </UniformGrid>
+            <UniformGrid Columns="2" Rows="6">
+                <TextBlock>Vacation Type</TextBlock>
+                <ComboBox ItemsSource="{Binding VacationTypes}" SelectedItem="{Binding NewVacation.Type}"></ComboBox>
+                <TextBlock>Description</TextBlock>
+                <TextBox Text="{Binding NewVacation.Description}"></TextBox>
+                <TextBlock>Photo</TextBlock>
+                <TextBox Text="{Binding NewVacation.Photo}"></TextBox>
+                <TextBlock Text="Rating" ></TextBlock>
+                <Slider Minimum="1" Maximum="10" Value="{Binding NewVacation.Rating}"></Slider>
+                <TextBlock Text="Reservation"></TextBlock>
+                <ToggleButton Content="Reservation Status"  Checked="ToggleButton_Checked" Unchecked="ToggleButton_Unchecked" ></ToggleButton>
+                <Button Content="Add New Vacation" Click="AddNew"></Button>
+                <Button Content="Delete Vacation" Click="DeleteVacation"></Button>
+        </UniformGrid>
+        </UniformGrid>
+    </DockPanel>
+</Window>
